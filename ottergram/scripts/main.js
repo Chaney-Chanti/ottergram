@@ -8,26 +8,22 @@ var ESC_KEY = 27;
 
 var slider_img = document.querySelector('.detail-image')
 var images = getThumbnailsArray(); // array of images
+var titles = ["Stayin' Alive","How Deep Is Your Love","You Should Be Dancing","Night Fever","To Love Somebody"]
 var i = 0;
-
-
-var a = document.getElementById("button-next")
-a.addEventListener('click', function () { 
-    console.log('hello') 
-    i = getCurrImg();
-    next(); 
-})
-
-
 
 var b = document.getElementById("button-prev")
 b.addEventListener('click', function () {  
-    console.log('bye') 
-    i = getCurrImg();
+    console.log('previous') 
+    i = getCurrImg()-1;
     previous(); 
 })
 
-
+var a = document.getElementById("button-next")
+a.addEventListener('click', function () { 
+    console.log('next') 
+    i = getCurrImg()-1;
+    next(); 
+})
 
 function getCurrImg(){
     var detailImage = document.querySelector(DETAIL_IMAGE_SELECTOR);
@@ -36,6 +32,8 @@ function getCurrImg(){
 }
 
 function previous(){
+    console.log('previous func')
+    console.log(i)
     if(i <= 0){
         i = images.length-1;
     }
@@ -46,6 +44,8 @@ function previous(){
 }
 
 function next(){
+    console.log('next func')
+    console.log(i)
     if(i >= images.length - 1){
         i=0;
     }
@@ -56,7 +56,9 @@ function next(){
 }
 
 function setImage(){
-    return slider_img.setAttribute('src', images[i]);
+    slider_img.setAttribute('src', images[i]);
+    var detailTitle = document.querySelector(DETAIL_TITLE_SELECTOR);
+    detailTitle.textContent = titles[i];
 }
 
 function setDetails(imageUrl, titleText) {
